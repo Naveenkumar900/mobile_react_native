@@ -12,12 +12,13 @@ import { Flexdemo } from './components/Flexdemo';
 import { Logindemopage } from './components/Logindemopage';
 import { Listdemo } from './components/Listdemo';
 import { Flatlistdemo } from './components/Flatlistdemo';
+import { Product } from './components/Product';
 
 export default function App() {
   return (
     <View style={styles.container}>
       
-         <Flatlistdemo/>
+         <Product/>
     </View>
   );
 }
