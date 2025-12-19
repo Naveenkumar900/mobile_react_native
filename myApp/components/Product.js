@@ -1,8 +1,8 @@
-import {View, Text, Image, StyleSheet, Platform,StatusBar,Button} from 'react-native';
-import{touchableOpacity} from 'react-native';
-import { FlatList } from 'react-native';
+import {View, Text, Image, StyleSheet, Platform, StatusBar, Button, TouchableOpacity, FlatList, TextInput} from 'react-native';
+
+/* NOTE: consolidated imports for clarity */
 import React, {useState} from 'react';
-import { TextInput } from 'react-native';
+import {MaterialIcons} from '@expo/vector-icons';
 export function Product(){
     let products=[
     {
@@ -210,17 +210,42 @@ export function Product(){
         img:"data:image/jpeg;base64,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"
     }
 ]
-const [productlist,setProductlist]=useState(products);
-const handleSearch=(e)=>{
-    let txt=e.nativeEvent.text;
-    let searchProduct=products.filter((item)=>item.name.startsWith(txt));
+const [productlist, setProductlist] = useState(products);
+const handleSearch = (txt) => {
+    const q = txt.trim().toLowerCase();
+    if (!q) {
+        setProductlist(products);
+        return;
+    }
+    const searchProduct = products.filter((item) => {
+        const hay = `${item.name} ${item.brand} ${item.category}`.toLowerCase();
+        return hay.includes(q);
+    });
     setProductlist(searchProduct);
+};
+const deleteItem = (item) => {
+    const filtered = productlist.filter((prod) => prod.id !== item.id);
+    setProductlist(filtered);
+};
+const updateItem=(item)=>{
+    const filtered=productlist.map((prod)=>{
+        if(prod.id===item.id){
+            return{...prod, price:prod.price+1000};
+        }
+        return prod;
+    });
+    setProductlist(filtered);
 }
 
     return(
         <View style={mystyle.container}>
-            <View >
-                <TextInput placeholder='Search'onChange={handleSearch}/>
+            <View style={{padding:12,borderColor:"grey", }}>
+                <TextInput placeholder='Search' onChangeText={handleSearch} style={{padding:8,backgroundColor:'#fff',borderRadius:6}} />
+            </View>
+            <View style={{flexDirection:'row',justifyContent:'space-around'}}>
+                <Button title='All' onPress={()=>setProductlist(products)}/>
+                <Button title='Electronics' onPress={()=>{let filtered=products.filter((item)=>item.category==='electronics'); setProductlist(filtered)}}/>
+                <Button title='Furniture' onPress={()=>{let filtered=products.filter((item)=>item.category==='furniture'); setProductlist(filtered)}}/>
             </View>
             <FlatList
             data={productlist}
@@ -231,13 +256,14 @@ const handleSearch=(e)=>{
                   <Text style={{fontWeight:'800'}}>{item.name} | {item.brand}</Text>
                    <Text>Price: ₹{item.price}</Text>
                    <Text>Rating: {item.rating}</Text>
-                   <View style={{flexDirection:'row'}}>
-                   <touchableOpacity onPress={()=>{}}>
-                    <Text>Buy Now</Text>
-                   </touchableOpacity>
-                   <touchableOpacity onPress={()=>{}}>
-                    <Text>Add to cart</Text>
-                   </touchableOpacity>
+                   <View style={{flexDirection:'row', gap:5, padding:5, alignItems:'center'}}>
+                    {item.instock ? <Button title='Buy Now'/> : <Text style={{justifyContent:'center',color:'red'}}>Out Of Stock</Text>}
+                    <TouchableOpacity onPress={() => deleteItem(item)} style={{padding:6}}>
+                      <MaterialIcons name="delete" size={24} color="red" />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{updateItem(item)}}> 
+                    <MaterialIcons name='edit' size={24} color='blue' />
+                    </TouchableOpacity>
                    </View>
                     
                 </View>

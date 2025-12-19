@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 
 // Simple Counter: just tracks count and exposes + / - buttons
-const Counter = ({ initial = 0 }) => {
+const Counter = ({ initial = 0 },route) => {
   const [count, setCount] = useState(initial);
 
   return (

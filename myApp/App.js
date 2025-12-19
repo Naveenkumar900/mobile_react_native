@@ -1,38 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Counter from './components/Counter';
-import Currencycomp from './components/Currencycomp';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { View, Text, StyleSheet } from 'react-native';
 import { Body } from './components/Body';
-import { Jsxdemo } from './components/Jsxdemo';
-import { Imagedemo } from './components/Imagedemo';
-import { Pressabledemo } from './components/Pressabledemo';
-import { Touchabledemo } from './components/Touchabledemo';
-import { Stylesdemo } from './components/Stylesdemo';
-import { Flexdemo } from './components/Flexdemo';
+import { Comp1 } from './components/Comp1';
+import Counter from './components/Counter';
+import { Useeffectdemo } from './components/Useeffectdemo';
+import { Axiosdemo } from './components/Axiosdemo';
 import { Logindemopage } from './components/Logindemopage';
-import { Listdemo } from './components/Listdemo';
-import { Flatlistdemo } from './components/Flatlistdemo';
-import { Product } from './components/Product';
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+
+export default function App(){
   return (
-    <View style={styles.container}>
-      
-         <Product/>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{headerShown: true}}>
+        <Stack.Screen name="Home" component={Comp1} />
+        <Stack.Screen name="Counter" screenOptions={{headerShown: false, headerStyle: { backgroundColor: "tomato" }}} component={Counter} />
+        <Stack.Screen name="Useeffectdemo" component={Useeffectdemo} />
+        <Stack.Screen name="Axiosdemo" component={Axiosdemo} />
+        <Stack.Screen name="Logindemopage" component={Logindemopage} />
+        <Stack.Screen name="Body" component={Body} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: '600',
-    marginBottom: 12,
-  },
+  container: { flex: 1, backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center' },
+  title: { fontSize: 18, fontWeight: '600', marginBottom: 8 }
 });
